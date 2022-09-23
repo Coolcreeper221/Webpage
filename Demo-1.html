@@ -80,6 +80,7 @@
 		}
 
 		#status-indeterminate {
+			height: 42px;
 			visibility: visible;
 			position: relative;
 		}
@@ -114,7 +115,6 @@
 <link id='-gd-engine-icon' rel='icon' type='image/png' href='Demo-1.icon.png' />
 <link rel='apple-touch-icon' href='Demo-1.apple-touch-icon.png'/>
 <link rel='manifest' href='Demo-1.manifest.json'>
-<script type='application/javascript'>window.addEventListener('load', () => {if ('serviceWorker' in navigator) {navigator.serviceWorker.register('Demo-1.service.worker.js');}});</script>
 
 </head>
 <body>
@@ -140,7 +140,7 @@
 	<script type='text/javascript' src='Demo-1.js'></script>
 	<script type='text/javascript'>//<![CDATA[
 
-		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"Demo-1","experimentalVK":false,"fileSizes":{"Demo-1.pck":5163472,"Demo-1.wasm":17493574},"focusCanvas":true,"gdnativeLibs":[]};
+		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"Demo-1","experimentalVK":false,"fileSizes":{"Demo-1.pck":5158784,"Demo-1.wasm":17860295},"focusCanvas":true,"gdnativeLibs":[],"serviceWorker":"Demo-1.service.worker.js"};
 		var engine = new Engine(GODOT_CONFIG);
 
 		(function() {
@@ -246,3 +246,4 @@
 	//]]></script>
 </body>
 </html>
+
