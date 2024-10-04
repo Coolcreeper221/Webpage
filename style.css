@@ -245,11 +245,11 @@ body {
   justify-content: space-evenly;
 }
 .clear {
-  width: 90%;
-  outline-offset: 20px;
+  width: 4vw;
+  outline-offset: 1vw;
   border-spacing: 100px;
   border-radius: 50%;
-  outline: 4px solid white;
+  outline: 0.2vw solid white;
 }
 #dark {
   opacity: 0;
