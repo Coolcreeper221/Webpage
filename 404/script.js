@@ -1,5 +1,5 @@
 // Simulated list of folder names in the subdirectory
-const folders = ["01"];
+const folders = ["01", "02"];
 
 // Get the base URL dynamically from the current location
 const baseUrl = "../task/"; // This gets the current URL
