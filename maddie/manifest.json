@@ -2,7 +2,7 @@
   "name": "Maddie's 18 Present",
   "short_name": "App",
   "description": "An app for the best girlfriend ever",
-  "start_url": "/index.html",
+  "start_url": "/maddie/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4CAF50",
