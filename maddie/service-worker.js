@@ -107,3 +107,27 @@ self.addEventListener("notificationclick", function (event) {
     event.waitUntil(clients.openWindow(event.notification.data));
   }
 });
+
+importScripts("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js");
+importScripts(
+  "https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging.js"
+);
+
+firebase.initializeApp({
+  apiKey: "AIzaSyA05rZGzqQJ2j6zjWXh4FjNF9OmSceD9h0",
+  authDomain: "maddie-e9b73.firebaseapp.com",
+  projectId: "maddie-e9b73",
+  storageBucket: "maddie-e9b73.firebasestorage.app",
+  messagingSenderId: "521450096310",
+  appId: "1:521450096310:web:c5e9b5b2b27a0800cfc817",
+  measurementId: "G-D0QVH5T93R",
+});
+
+const messaging = firebase.messaging();
+
+messaging.onBackgroundMessage((payload) => {
+  self.registration.showNotification(payload.notification.title, {
+    body: payload.notification.body,
+    icon: "/maddie/assets/icons/192x192.png",
+  });
+});

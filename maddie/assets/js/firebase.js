@@ -57,3 +57,10 @@ async function sendTokenToServer(token) {
 requestPermission().then((token) => {
   if (token) sendTokenToServer(token);
 });
+onMessage(messaging, (payload) => {
+  console.log("New message:", payload);
+  new Notification(payload.notification.title, {
+    body: payload.notification.body,
+    icon: "/maddie/assets/icons/192x192.png",
+  });
+});
