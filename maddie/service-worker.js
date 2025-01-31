@@ -1,27 +1,44 @@
-self.addEventListener("install", (event) => {
+self.addEventListener("install", function (event) {
   event.waitUntil(
-    caches.open("app-cache").then((cache) => {
-      return cache.addAll([
-        "/",
-        "/login/",
-        "/calendar/",
-        "/calendar/cal.js",
-        "/calendar/cal.css",
-        "/assets/js/main.js",
-        "/assets/js/browser.min.js",
-        "/assets/js/jquery.scrollex.min.js",
-        "/assets/js/jquery.min.js",
-        "/assets/js/jquery.scrolly.min.js",
-        "/assets/js/lock.js",
-        "/assets/js/login.js",
-        "/assets/js/util.js",
-        "/assets/icons/192x192.png",
-        "/assets/icons/512x512.png",
-      ]);
+    caches.open("app-cache").then(function (cache) {
+      const urlsToCache = [
+        "/maddie/",
+        "/maddie/login/",
+        "/maddie/calendar/",
+        "/maddie/assets/css/main.css",
+        "/maddie/calendar/cal.js",
+        "/maddie/calendar/cal.css",
+        "/maddie/assets/js/main.js",
+        "/maddie/assets/js/browser.min.js",
+        "/maddie/assets/js/jquery.scrollex.min.js",
+        "/maddie/assets/js/jquery.min.js",
+        "/maddie/assets/js/jquery.scrolly.min.js",
+        "/maddie/assets/js/lock.js",
+        "/maddie/assets/js/login.js",
+        "/maddie/assets/js/util.js",
+        "/maddie/assets/icons/192x192.png",
+        "/maddie/assets/icons/512x512.png",
+      ];
+
+      function addResource(url) {
+        return fetch(url).then((response) => {
+          if (
+            !response ||
+            response.status !== 200 ||
+            response.type !== "basic"
+          ) {
+            throw new Error("Failed to fetch resource:", url);
+          }
+          return cache.put(url, response.clone());
+        });
+      }
+
+      return urlsToCache.reduce((promise, url) => {
+        return promise.then(() => addResource(url));
+      }, Promise.resolve());
     })
   );
 });
-
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 

@@ -102,7 +102,8 @@
   });
 })(jQuery);
 
-if (window.location.href !== "/maddie/login/") {
+if (!window.location.href.includes("/maddie/login/")) {
+  console.log("href:", window.location.href);
   const pageList = document.getElementById("pageList");
   document
     .getElementById("pageListButton")
@@ -136,16 +137,22 @@ if (window.location.href !== "/maddie/login/") {
     pageList.style.display = "block"; // Makes it visible again
   }
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker
-      .register("../service-worker.js")
-      .then((registration) => {
-        console.log(
-          "Service Worker registered with scope:",
-          registration.scope
-        );
-      })
-      .catch((error) => {
-        console.log("Service Worker registration failed:", error);
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      registrations.forEach((registration) => {
+        if (registration.active && registration.scope !== "/maddie/") {
+          registration.unregister().then(() => {
+            console.log("Unregistered old SW:", registration.scope);
+          });
+        }
       });
+    });
+    navigator.serviceWorker.getRegistration().then((registration) => {
+      if (!registration) {
+        navigator.serviceWorker
+          .register("/maddie/service-worker.js")
+          .then(() => console.log("Service Worker registered."))
+          .catch((err) => console.error("SW Registration Failed:", err));
+      }
+    });
   }
 }
