@@ -87,3 +87,23 @@ self.addEventListener("activate", (event) => {
     })
   );
 });
+self.addEventListener("push", function (event) {
+  const data = event.data ? event.data.json() : {};
+  const title = data.title || "New Notification";
+  const options = {
+    body: data.body || "You have a new message",
+    icon: data.icon || "/app/icon.png",
+    badge: "/app/badge.png",
+    data: data.url || "/app/",
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+// Handle click event
+self.addEventListener("notificationclick", function (event) {
+  event.notification.close();
+  if (event.notification.data) {
+    event.waitUntil(clients.openWindow(event.notification.data));
+  }
+});
